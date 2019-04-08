@@ -6,7 +6,7 @@
 #    By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/03 03:51:55 by sbearded          #+#    #+#              #
-#    Updated: 2019/04/08 16:25:33 by sbearded         ###   ########.fr        #
+#    Updated: 2019/04/08 18:57:49 by sbearded         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,11 +32,13 @@ FR_SRC_DIR = srcs/free/
 
 MS_SRC = 	minishell.c
 
-PR_SRC = 	print_prompt.c
+PR_SRC = 	print_prompt.c \
+			error.c
 
 WK_SRC = 	wait_input.c \
 			commands.c \
-			ft_strsplit_multiple.c
+			ft_strsplit_multiple.c \
+			get_commands.c
 
 FR_SRC = 	ft_2d_del.c
 

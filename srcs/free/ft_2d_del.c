@@ -6,7 +6,7 @@
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/30 22:47:12 by sbearded          #+#    #+#             */
-/*   Updated: 2019/04/08 16:26:25 by sbearded         ###   ########.fr       */
+/*   Updated: 2019/04/08 19:08:04 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,10 @@ void	ft_2d_del(char ***m)
 	char	**x;
 
 	x = *m;
-	if (m != NULL)
+	if (m)
 	{
-		while (**m != NULL)
-		{
-			free(**m);
-			(void)((*m)++);
-		}
-		free(x);
+		while (x && *x)
+			free(*(x++));
+		free(*m);
 	}
 }
