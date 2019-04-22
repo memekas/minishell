@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   mini_exit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/08 18:35:35 by sbearded          #+#    #+#             */
-/*   Updated: 2019/04/22 16:57:06 by sbearded         ###   ########.fr       */
+/*   Created: 2019/04/22 16:46:50 by sbearded          #+#    #+#             */
+/*   Updated: 2019/04/22 16:47:19 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	error_command_not_found(char *str)
+void	mini_exit()
 {
-	ft_putstr_fd("mini: ", 2);
-	ft_putstr_fd(str, 2);
-	ft_putstr_fd(": command not found\n", 2);
+	exit(0);
 }

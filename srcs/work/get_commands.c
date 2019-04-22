@@ -6,35 +6,13 @@
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 17:26:56 by sbearded          #+#    #+#             */
-/*   Updated: 2019/04/08 19:12:00 by sbearded         ###   ########.fr       */
+/*   Updated: 2019/04/22 18:41:48 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	**split_argv(char *str, char *sym)
-{
-	char	**words;
-
-	words = ft_strsplit_multiple(str, sym);
-	return (words);
-}
-
-static char	**get_path_com(char **envp)
-{
-	char	*path;
-	char	**path_com;
-
-	while (envp && *envp && ft_strncmp(*envp, "PATH=", 5))
-		envp++;
-	if (!envp || !*envp)
-		return (NULL);	
-	path = *envp;
-	path_com = split_argv(path + 5, ":");
-	return (path_com);
-}
-
-static int	check_com(char **envp, char **argv, char *str)
+static int	mini_exec(char **envp, char **argv)
 {
 	char			**path_com;
 	char			**tmp;
@@ -42,11 +20,8 @@ static int	check_com(char **envp, char **argv, char *str)
 	struct dirent	*file;
 
 	
-	if (!(path_com = get_path_com(envp)))
-	{
-		ft_2d_del(&path_com);
+	if (!(path_com = get_env(envp, "PATH")))
 		return (0);
-	}
 	tmp = path_com;
 	while (*path_com)
 	{
@@ -63,19 +38,41 @@ static int	check_com(char **envp, char **argv, char *str)
 	return (0);
 }
 
+static void	check_com(char **envp, char **argv)
+{
+	if (ft_strequ("echo", argv[0]))
+		mini_echo(envp, argv);
+	else if (ft_strequ("cd", argv[0]))
+		mini_cd();
+	else if (ft_strequ("env", argv[0]))
+		mini_env();
+	else if (ft_strequ("setenv", argv[0]))
+		mini_setenv();
+	else if (ft_strequ("unsetenv", argv[0]))
+		mini_unsetenv();
+	else if (ft_strequ("exit", argv[0]))
+		mini_exit();
+	else
+	{
+		if (mini_exec(envp, argv))
+			printf("YEAH!\n");
+		else
+			error_command_not_found(argv[0]);
+	}
+}
+
 void	get_commands(char **envp, char *str)
 {
 	char	**com;
 	char	**argv;
 	char	**tmp;
 
-	com = split_argv(str, ";");
+	com = ft_strsplit_multiple(str, ";");
 	tmp = com;
 	while (com && *com)
 	{
-		argv = split_argv(str, " \t\n\0");
-		if (check_com(envp, argv, *com))
-			printf("YEAH!\n");
+		argv = ft_strsplit_multiple(*com, " \t\n\0");
+		check_com(envp, argv);
 		com++;
 		ft_2d_del(&argv);
 	}

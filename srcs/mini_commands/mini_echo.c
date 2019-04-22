@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   mini_echo.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/08 18:35:35 by sbearded          #+#    #+#             */
-/*   Updated: 2019/04/22 16:57:06 by sbearded         ###   ########.fr       */
+/*   Created: 2019/04/22 16:48:49 by sbearded          #+#    #+#             */
+/*   Updated: 2019/04/22 18:41:27 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	error_command_not_found(char *str)
+void	mini_echo(char **envp, char **argv)
 {
-	ft_putstr_fd("mini: ", 2);
-	ft_putstr_fd(str, 2);
-	ft_putstr_fd(": command not found\n", 2);
+	argv++;
+	while (argv && *argv)
+	{
+		ft_putstr(get_expansion(envp, *(argv++)));
+		ft_putchar(' ');
+	}
+	ft_putchar('\n');
 }
