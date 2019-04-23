@@ -6,7 +6,7 @@
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 17:26:56 by sbearded          #+#    #+#             */
-/*   Updated: 2019/04/22 18:41:48 by sbearded         ###   ########.fr       */
+/*   Updated: 2019/04/23 17:03:01 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	get_commands(char **envp, char *str)
 	while (com && *com)
 	{
 		argv = ft_strsplit_multiple(*com, " \t\n\0");
+		expansion_argv(envp, argv);
 		check_com(envp, argv);
 		com++;
 		ft_2d_del(&argv);
