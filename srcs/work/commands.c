@@ -6,13 +6,13 @@
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 14:45:32 by sbearded          #+#    #+#             */
-/*   Updated: 2019/04/22 17:16:19 by sbearded         ###   ########.fr       */
+/*   Updated: 2019/04/25 15:13:29 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void		commands(char **envp)
+void		commands(char ***envp)
 {
 	char	*str;
 

@@ -6,7 +6,7 @@
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/06 14:35:38 by sbearded          #+#    #+#             */
-/*   Updated: 2019/04/23 17:13:42 by sbearded         ###   ########.fr       */
+/*   Updated: 2019/04/25 16:11:42 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,15 @@ void	print_prompt(void);
 ** work
 */
 char	*wait_input(void);
-void	commands(char **envp);
+void	commands(char ***envp);
 char	**ft_strsplit_multiple(char const *s, char *c);
-void	get_commands(char **envp, char *str);
+void	get_commands(char ***envp, char *str);
 char	**get_env(char **envp, char *str);
-char	*search_env(char **envp, char *str); //!
-char	*get_expansion(char **envp, char *str); //!
-void	expansion_argv(char **envp, char **argv);
+char	*search_env(char **envp, char *str);
+int		expansion_argv(char **envp, char **argv);
 size_t	ft_strinsert(char **dest, size_t index, size_t size, char *src);
+size_t	get_dollar(char **envp, char **dest, size_t index);
+int		tilde_f(char **envp, char **dest);
 
 /*
 ** commands
@@ -46,8 +47,8 @@ size_t	ft_strinsert(char **dest, size_t index, size_t size, char *src);
 void	mini_exit();
 void	mini_cd();
 void	mini_echo(char **envp, char **argv);
-void	mini_env();
-void	mini_setenv();
+void	mini_env(char **envp);
+void	mini_setenv(char ***envp, char **argv);
 void	mini_unsetenv();
 
 /*
@@ -59,5 +60,7 @@ void	ft_2d_del(char ***m);
 ** error
 */
 void	error_command_not_found(char *str);
+void	error_tilde_no_user(char *str);
+void	error_print(char *func, char *text);
 
 #endif

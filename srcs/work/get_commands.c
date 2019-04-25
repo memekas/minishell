@@ -6,7 +6,7 @@
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 17:26:56 by sbearded          #+#    #+#             */
-/*   Updated: 2019/04/23 17:03:01 by sbearded         ###   ########.fr       */
+/*   Updated: 2019/04/25 15:58:08 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,30 +38,30 @@ static int	mini_exec(char **envp, char **argv)
 	return (0);
 }
 
-static void	check_com(char **envp, char **argv)
+static void	check_com(char ***envp, char **argv)
 {
 	if (ft_strequ("echo", argv[0]))
-		mini_echo(envp, argv);
+		mini_echo(*envp, argv);
 	else if (ft_strequ("cd", argv[0]))
 		mini_cd();
 	else if (ft_strequ("env", argv[0]))
-		mini_env();
+		mini_env(*envp);
 	else if (ft_strequ("setenv", argv[0]))
-		mini_setenv();
+		mini_setenv(envp, argv);
 	else if (ft_strequ("unsetenv", argv[0]))
 		mini_unsetenv();
 	else if (ft_strequ("exit", argv[0]))
 		mini_exit();
 	else
 	{
-		if (mini_exec(envp, argv))
+		if (mini_exec(*envp, argv))
 			printf("YEAH!\n");
 		else
 			error_command_not_found(argv[0]);
 	}
 }
 
-void	get_commands(char **envp, char *str)
+void	get_commands(char ***envp, char *str)
 {
 	char	**com;
 	char	**argv;
@@ -72,7 +72,8 @@ void	get_commands(char **envp, char *str)
 	while (com && *com)
 	{
 		argv = ft_strsplit_multiple(*com, " \t\n\0");
-		expansion_argv(envp, argv);
+		if (expansion_argv(*envp, argv) == -1)
+			break ;
 		check_com(envp, argv);
 		com++;
 		ft_2d_del(&argv);

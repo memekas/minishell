@@ -6,7 +6,7 @@
 #    By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/03 03:51:55 by sbearded          #+#    #+#              #
-#    Updated: 2019/04/23 16:18:17 by sbearded         ###   ########.fr        #
+#    Updated: 2019/04/25 13:38:52 by sbearded         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,9 @@ WK_SRC = 	wait_input.c \
 			get_commands.c \
 			get_expansion.c \
 			get_env.c \
-			ft_strinsert.c
+			ft_strinsert.c \
+			dollar.c \
+			tilde.c
 
 FR_SRC = 	ft_2d_del.c
 
