@@ -6,7 +6,7 @@
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 13:39:01 by sbearded          #+#    #+#             */
-/*   Updated: 2019/04/25 14:29:18 by sbearded         ###   ########.fr       */
+/*   Updated: 2019/04/26 23:08:52 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int		check_tildename(char *tildename, char **home)
 	return (1);
 }
 
-int	tilde_f(char **envp, char **dest)
+int	tilde_f(t_list *env, char **dest)
 {
 	size_t	len_name;
 	char	*str;
@@ -70,16 +70,17 @@ int	tilde_f(char **envp, char **dest)
 	if ((len_name = get_tildename(&tildename, str)) == -1)
 		return (1);
 	if (ft_strequ(tildename, "+"))
-		str = search_env(envp, "PWD");
+		str = search_env(env, "PWD");
 	else if (ft_strequ(tildename, "-"))
-		str = search_env(envp, "OLDPWD");
+		str = search_env(env, "OLDPWD");
 	else
 	{
-		str = search_env(envp, "HOME");
+		str = search_env(env, "HOME");
 		if (len_name > 0)
 			if (check_tildename(tildename, &str) == 0)
 				return (-1);
 	}
 	ft_strinsert(dest, 0, len_name + 1, str);
+	free(tildename);
 	return (1);
 }

@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_2d_del.c                                        :+:      :+:    :+:   */
+/*   ft_lstdelcontent.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/30 22:47:12 by sbearded          #+#    #+#             */
-/*   Updated: 2019/04/08 19:08:04 by sbearded         ###   ########.fr       */
+/*   Created: 2018/11/29 18:35:49 by sbearded          #+#    #+#             */
+/*   Updated: 2018/12/03 23:56:38 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	ft_2d_del(char ***m)
+void	ft_lstdelcontent(void *c, size_t c_size)
 {
-	char	**x;
-
-	x = *m;
-	if (m)
+	if (c != NULL)
 	{
-		while (x && *x)
-			free(*(x++));
-		free(*m);
+		free(c);
+		(void)c_size;
 	}
 }

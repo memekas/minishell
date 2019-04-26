@@ -6,13 +6,13 @@
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/22 16:48:49 by sbearded          #+#    #+#             */
-/*   Updated: 2019/04/23 16:35:10 by sbearded         ###   ########.fr       */
+/*   Updated: 2019/04/26 19:15:31 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	mini_echo(char **envp, char **argv)
+void	mini_echo(char **argv)
 {
 	argv++;
 	while (argv && *argv)

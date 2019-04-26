@@ -6,17 +6,18 @@
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/22 16:49:14 by sbearded          #+#    #+#             */
-/*   Updated: 2019/04/25 15:08:56 by sbearded         ###   ########.fr       */
+/*   Updated: 2019/04/26 19:16:00 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	mini_env(char **envp)
+void	mini_env(t_list *env)
 {
-	while (envp && *envp)
+	while (env)
 	{
-		ft_putstr(*(envp++));
+		ft_putstr(env->content);
 		ft_putchar('\n');
+		env = env->next;
 	}
 }

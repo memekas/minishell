@@ -6,7 +6,7 @@
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 13:37:47 by sbearded          #+#    #+#             */
-/*   Updated: 2019/04/25 14:17:30 by sbearded         ###   ########.fr       */
+/*   Updated: 2019/04/26 19:10:17 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ size_t	get_envname(char **dest, char *src)
 	return (len);
 }
 
-size_t	get_dollar(char **envp, char **dest, size_t index)
+size_t	get_dollar(t_list *env, char **dest, size_t index)
 {
 	size_t	len_name;
 	char	*src;
 	char	*name;
-	char	*env;
+	char	*env_str;
 
 	src = (*dest) + index;
 	if (*src == '$')
@@ -49,7 +49,7 @@ size_t	get_dollar(char **envp, char **dest, size_t index)
 		free(name);
 		return (1);
 	}
-	env = search_env(envp, name);
+	env_str = search_env(env, name);
 	free(name);
-	return (ft_strinsert(dest, index, len_name + 1, env));
+	return (ft_strinsert(dest, index, len_name + 1, env_str));
 }

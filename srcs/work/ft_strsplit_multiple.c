@@ -6,7 +6,7 @@
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 23:08:41 by sbearded          #+#    #+#             */
-/*   Updated: 2019/04/25 15:57:42 by sbearded         ###   ########.fr       */
+/*   Updated: 2019/04/26 23:25:12 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ char				**ft_strsplit_multiple(char const *s, char *c)
 		s = write_word(s, c, split[i]);
 		i++;
 	}
-	split[i] = (char*)malloc(sizeof(char));
 	split[i] = NULL;
 	return (split);
 }

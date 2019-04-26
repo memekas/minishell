@@ -6,25 +6,13 @@
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/22 16:49:31 by sbearded          #+#    #+#             */
-/*   Updated: 2019/04/25 17:17:09 by sbearded         ###   ########.fr       */
+/*   Updated: 2019/04/26 23:32:06 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	argc_count(char **argv)
-{
-	int	len = 0;
-
-	while (argv && *argv)
-	{
-		len++;
-		argv++;
-	}
-	return (len);
-}
-
-int		check_name(char *str)
+int				check_name(char *str)
 {
 	if (!ft_isalpha(*str) && *str != '_')
 	{
@@ -45,67 +33,57 @@ int		check_name(char *str)
 	return (1);
 }
 
-static void	env_copy(char **dest, char **src)
+static size_t	new_env(char **new_str, char *name, char *val)
 {
-	int	i;
+	size_t	len[3];
 
-	i = -1;
-	while (src && src[++i])
-		dest[i] = src[i];
-	dest[i] = ft_strdup("\0");
+	len[0] = ft_strlen(name);
+	len[1] = ft_strlen(val);
+	len[2] = len[0] + len[1] + 1;
+	*new_str = (char*)malloc(sizeof(char) * (len[2] + 1));
+	(*new_str)[len[2]] = '\0';
+	ft_memmove(*new_str, name, len[0]);
+	(*new_str)[len[0]] = '=';
+	ft_memmove(*new_str + len[0] + 1, val, len[1]);
+	return (len[2]);
 }
 
-char	**env_realloc(char **envp, int sign, char *str)
+static void		old_env(t_list *env, char *name, char *val)
 {
-	static int	max_size = 30;
-	static int	size = 0;
-	char		**new;
-
-	if (size == 0)
-	{
-		new = (char**)malloc(sizeof(char*) * (max_size + 1));
-		env_copy(new, envp);
-		size = argc_count(envp);
-	}
-	if (sign == 1)
-		size++;
-	else if (sign == -1)
-		size--;
-	if (size > max_size)
-	{
-		max_size *= 2;
-		new = (char**)malloc(sizeof(char*) * (max_size + 1));
-	}
-	else
-		new = envp;
-	if (sign == 1)
-
-	return (envp);
-}
-
-void	mini_setenv(char ***envp, char **argv)
-{
+	size_t	count;
 	char	*new;
-	int		count;
-	int		len_var;
-	int		len_name;
-	
-	count = argc_count(argv);
+
+	free(env->content);
+	count = new_env(&new, name, val);
+	env->content = new;
+	env->content_size = count;
+}
+
+void			mini_setenv(t_list **env, char **argv)
+{
+	size_t	count;
+	char	*val;
+	t_list	*tmp;
+	char	*new;
+
+	count = ft_2d_count(argv);
 	if (count > 3)
 		return (error_print("setenv", "Too many arguments."));
 	else if (count == 1)
-		return (mini_env(*envp));
+		return (mini_env(*env));
 	else if (count == 2)
-		len_var = 0;
+		val = NULL;
 	else
-		len_var = ft_strlen(argv[2]);
-	if (check_name(argv[1]) == 0)
+		val = argv[2];
+	if (!check_name(argv[1]))
 		return ;
-	len_name = ft_strlen(argv[1]);
-	new = (char*)malloc(sizeof(char) * (len_name + len_var + 2));
-	new[len_name + len_var + 1] = '\0';
-	ft_memmove(new, argv[1], len_name);
-	new[len_name] = '=';
-	ft_memmove(new + len_name + 1, argv[2], len_var);
-	*envp = env_realloc(*envp, 1);
+	tmp = search_env_lst(*env, argv[1]);
+	if (tmp)
+		old_env(tmp, argv[1], val);
+	else
+	{
+		count = new_env(&new, argv[1], val);
+		ft_lstaddend(env, ft_lstnew(new, count + 1));
+		free(new);
+	}
 }
