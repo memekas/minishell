@@ -6,7 +6,7 @@
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/27 22:26:57 by sbearded          #+#    #+#             */
-/*   Updated: 2019/04/28 01:28:13 by sbearded         ###   ########.fr       */
+/*   Updated: 2019/04/28 01:32:44 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	check_com_name(char *name)
 	if (!(x == S_IFREG))
 		return (0);
 	if (access(name, X_OK))
-		return (0);
+		error_print(name, "permission denied");
 	return (1);
 }
 
