@@ -6,7 +6,7 @@
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 13:39:01 by sbearded          #+#    #+#             */
-/*   Updated: 2019/04/26 23:08:52 by sbearded         ###   ########.fr       */
+/*   Updated: 2019/04/27 16:29:18 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	tilde_f(t_list *env, char **dest)
 	else
 	{
 		str = search_env(env, "HOME");
-		if (len_name > 0)
+		if (len_name > 0 && str)
 			if (check_tildename(tildename, &str) == 0)
 				return (-1);
 	}

@@ -6,7 +6,7 @@
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/06 14:35:38 by sbearded          #+#    #+#             */
-/*   Updated: 2019/04/27 00:10:49 by sbearded         ###   ########.fr       */
+/*   Updated: 2019/04/27 18:18:43 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 # include <sys/uio.h>
 # include <unistd.h>
 # include <dirent.h>
+# include <sys/stat.h>
+
+# define BUFF_PWD	500
 
 /*
 ** print
@@ -38,6 +41,7 @@ void	get_commands(t_list **env, char *str);
 char	**get_env(t_list *env, char *str);
 char	*search_env(t_list *env, char *str);
 t_list	*search_env_lst(t_list *env, char *str);
+void	change_env(t_list **env, char *name, char *val);
 int		expansion_argv(t_list *env, char **argv);
 size_t	ft_strinsert(char **dest, size_t index, size_t size, char *src);
 size_t	get_dollar(t_list *env, char **dest, size_t index);
@@ -47,11 +51,11 @@ int		tilde_f(t_list *env, char **dest);
 ** commands
 */
 void	mini_exit(t_list **env);
-void	mini_cd();
+void	mini_cd(t_list **env, char **argv, size_t argc);
 void	mini_echo(char **argv);
 void	mini_env(t_list *env);
-void	mini_setenv(t_list **env, char **argv);
-void	mini_unsetenv(t_list **env, char **argv);
+void	mini_setenv(t_list **env, char **argv, size_t argc);
+void	mini_unsetenv(t_list **env, char **argv, size_t argc);
 
 /*
 ** error

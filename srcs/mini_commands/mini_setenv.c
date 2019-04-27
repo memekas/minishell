@@ -6,7 +6,7 @@
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/22 16:49:31 by sbearded          #+#    #+#             */
-/*   Updated: 2019/04/26 23:32:06 by sbearded         ###   ########.fr       */
+/*   Updated: 2019/04/27 16:04:07 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,42 +48,43 @@ static size_t	new_env(char **new_str, char *name, char *val)
 	return (len[2]);
 }
 
-static void		old_env(t_list *env, char *name, char *val)
+void			change_env(t_list **env, char *name, char *val)
 {
+	t_list	*tmp;
 	size_t	count;
 	char	*new;
 
-	free(env->content);
-	count = new_env(&new, name, val);
-	env->content = new;
-	env->content_size = count;
+	tmp = search_env_lst(*env, name);
+	if (tmp)
+	{
+		free(tmp->content);
+		count = new_env(&new, name, val);
+		tmp->content = new;
+		tmp->content_size = count;
+	}
+	else
+	{
+		count = new_env(&new, name, val);
+		ft_lstaddend(env, ft_lstnew(new, count + 1));
+		free(new);
+	}
 }
 
-void			mini_setenv(t_list **env, char **argv)
+void			mini_setenv(t_list **env, char **argv, size_t argc)
 {
-	size_t	count;
 	char	*val;
 	t_list	*tmp;
 	char	*new;
 
-	count = ft_2d_count(argv);
-	if (count > 3)
+	if (argc > 3)
 		return (error_print("setenv", "Too many arguments."));
-	else if (count == 1)
+	else if (argc == 1)
 		return (mini_env(*env));
-	else if (count == 2)
+	else if (argc == 2)
 		val = NULL;
 	else
 		val = argv[2];
 	if (!check_name(argv[1]))
 		return ;
-	tmp = search_env_lst(*env, argv[1]);
-	if (tmp)
-		old_env(tmp, argv[1], val);
-	else
-	{
-		count = new_env(&new, argv[1], val);
-		ft_lstaddend(env, ft_lstnew(new, count + 1));
-		free(new);
-	}
+	change_env(env, argv[1], val);
 }

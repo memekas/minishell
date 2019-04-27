@@ -6,13 +6,13 @@
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 17:26:56 by sbearded          #+#    #+#             */
-/*   Updated: 2019/04/27 00:11:10 by sbearded         ###   ########.fr       */
+/*   Updated: 2019/04/27 15:54:26 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	mini_exec(t_list *env, char **argv)
+static int	mini_exec(t_list *env, char **argv, size_t argc)
 {
 	char			**path_com;
 	char			**tmp;
@@ -42,21 +42,24 @@ static int	mini_exec(t_list *env, char **argv)
 
 static void	check_com(t_list **env, char **argv)
 {
+	size_t	argc;
+
+	argc = ft_2d_count(argv);
 	if (ft_strequ("echo", argv[0]))
 		mini_echo(argv);
 	else if (ft_strequ("cd", argv[0]))
-		mini_cd();
+		mini_cd(env, argv, argc);
 	else if (ft_strequ("env", argv[0]))
 		mini_env(*env);
 	else if (ft_strequ("setenv", argv[0]))
-		mini_setenv(env, argv);
+		mini_setenv(env, argv, argc);
 	else if (ft_strequ("unsetenv", argv[0]))
-		mini_unsetenv(env, argv);
+		mini_unsetenv(env, argv, argc);
 	else if (ft_strequ("exit", argv[0]))
 		mini_exit(env);
 	else
 	{
-		if (mini_exec(*env, argv))
+		if (mini_exec(*env, argv, argc))
 			printf("YEAH!\n");
 		else
 			error_command_not_found(argv[0]);

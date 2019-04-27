@@ -6,11 +6,13 @@
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/06 14:34:53 by sbearded          #+#    #+#             */
-/*   Updated: 2019/04/26 20:45:13 by sbearded         ###   ########.fr       */
+/*   Updated: 2019/04/27 16:46:40 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	*g_pwd;
 
 int		main(int argc, char **argv, char **envp)
 {
