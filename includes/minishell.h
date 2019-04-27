@@ -6,7 +6,7 @@
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/06 14:35:38 by sbearded          #+#    #+#             */
-/*   Updated: 2019/04/27 20:09:52 by sbearded         ###   ########.fr       */
+/*   Updated: 2019/04/27 22:29:24 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	mini_echo(char **argv);
 void	mini_env(t_list *env);
 void	mini_setenv(t_list **env, char **argv, size_t argc);
 void	mini_unsetenv(t_list **env, char **argv, size_t argc);
+int		mini_exec(t_list *env, char **argv);
 
 /*
 ** error

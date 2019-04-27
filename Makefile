@@ -6,7 +6,7 @@
 #    By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/03 03:51:55 by sbearded          #+#    #+#              #
-#    Updated: 2019/04/26 23:13:21 by sbearded         ###   ########.fr        #
+#    Updated: 2019/04/27 22:28:29 by sbearded         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,8 @@ MC_SRC = 	mini_cd.c \
 			mini_env.c \
 			mini_setenv.c \
 			mini_unsetenv.c \
-			mini_exit.c
+			mini_exit.c \
+			mini_exec.c
 
 MS_SRC_PATH = $(MS_SRC:%=$(MS_SRC_DIR)%)
 PR_SRC_PATH = $(PR_SRC:%=$(PR_SRC_DIR)%)

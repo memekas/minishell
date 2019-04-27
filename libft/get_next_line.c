@@ -6,7 +6,7 @@
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 23:57:07 by sbearded          #+#    #+#             */
-/*   Updated: 2018/12/14 13:53:23 by sbearded         ###   ########.fr       */
+/*   Updated: 2019/04/27 23:01:39 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static t_list	*get_lst_cur(t_list **lst_fd, const int fd)
 	lst = ft_lstnew(NULL, 0);
 	lst->content_size = (size_t)fd;
 	ft_lstadd(lst_fd, lst);
-	lst = *lst_fd;
 	return (lst);
 }
 
@@ -78,9 +77,6 @@ int				get_next_line(const int fd, char **line)
 	}
 	status = get_line(lst_cur, line, fd);
 	if (lst_cur->content && *(char*)(lst_cur->content) == '\0')
-	{
-		free(lst_cur->content);
-		lst_cur->content = NULL;
-	}
+		ft_lsterase(&lst_fd, "\0", 1);
 	return (status);
 }
