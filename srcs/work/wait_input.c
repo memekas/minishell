@@ -6,13 +6,13 @@
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 14:16:28 by sbearded          #+#    #+#             */
-/*   Updated: 2019/04/08 14:36:32 by sbearded         ###   ########.fr       */
+/*   Updated: 2019/04/27 20:13:11 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*wait_input()
+char	*wait_input(void)
 {
 	char	*line;
 

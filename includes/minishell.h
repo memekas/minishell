@@ -6,16 +6,15 @@
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/06 14:35:38 by sbearded          #+#    #+#             */
-/*   Updated: 2019/04/27 18:18:43 by sbearded         ###   ########.fr       */
+/*   Updated: 2019/04/27 20:09:52 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_C
-# define MINISHELL_C
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
 # include "libft.h"
 
-# include <stdio.h> //удалить
 # include <stdlib.h>
 # include <sys/types.h>
 # include <sys/uio.h>

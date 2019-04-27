@@ -6,7 +6,7 @@
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 17:26:56 by sbearded          #+#    #+#             */
-/*   Updated: 2019/04/27 19:12:33 by sbearded         ###   ########.fr       */
+/*   Updated: 2019/04/27 20:14:11 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static int	mini_exec(t_list *env, char **argv, size_t argc)
 	DIR				*dir;
 	struct dirent	*file;
 
-	
 	if (!(path_com = get_env(env, "PATH")))
 		return (0);
 	tmp = path_com;
@@ -69,11 +68,13 @@ static void	check_com(t_list **env, char **argv)
 	else if (ft_strequ("exit", argv[0]))
 		mini_exit(env);
 	else
+	{
 		if (!mini_exec(*env, argv, argc))
 			error_command_not_found(argv[0]);
+	}
 }
 
-void	get_commands(t_list **env, char *str)
+void		get_commands(t_list **env, char *str)
 {
 	char	**com;
 	char	**argv;

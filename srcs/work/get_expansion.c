@@ -6,7 +6,7 @@
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/22 17:31:57 by sbearded          #+#    #+#             */
-/*   Updated: 2019/04/26 19:08:47 by sbearded         ###   ########.fr       */
+/*   Updated: 2019/04/27 20:12:56 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int	expansion_argv(t_list *env, char **argv)
 			else
 				i++;
 		if ((*argv)[0] == '~')
-				if (tilde_f(env, argv) == -1)
-					return (-1);
+			if (tilde_f(env, argv) == -1)
+				return (-1);
 		argv++;
 	}
 	return (1);

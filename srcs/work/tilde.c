@@ -6,7 +6,7 @@
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 13:39:01 by sbearded          #+#    #+#             */
-/*   Updated: 2019/04/27 19:36:40 by sbearded         ###   ########.fr       */
+/*   Updated: 2019/04/27 20:14:40 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		check_tildename(char *tildename, char **home)
 	tail = 0;
 	while ((*home)[tail])
 		tail++;
-	while((*home)[tail] != '/')
+	while ((*home)[tail] != '/')
 		tail--;
 	(*home)[tail + 1] = '\0';
 	path = ft_strjoin(*home, tildename);
@@ -56,7 +56,7 @@ int		check_tildename(char *tildename, char **home)
 	return (1);
 }
 
-int	tilde_f(t_list *env, char **dest)
+int		tilde_f(t_list *env, char **dest)
 {
 	size_t	len_name;
 	char	*str;

@@ -6,7 +6,7 @@
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/22 16:47:53 by sbearded          #+#    #+#             */
-/*   Updated: 2019/04/27 18:50:30 by sbearded         ###   ########.fr       */
+/*   Updated: 2019/04/27 20:11:05 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ static void	get_err(char *path)
 	}
 	free(buf);
 	free(tmp);
-
 }
 
 void		mini_cd(t_list **env, char **argv, size_t argc)
