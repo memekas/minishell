@@ -6,7 +6,7 @@
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 17:26:56 by sbearded          #+#    #+#             */
-/*   Updated: 2019/04/28 00:29:43 by sbearded         ###   ########.fr       */
+/*   Updated: 2019/04/28 00:38:34 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	ft_interrupt(int sign)
 {
+	sign++;
 	ft_putchar('\n');
 }
 

@@ -6,7 +6,7 @@
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/22 16:49:31 by sbearded          #+#    #+#             */
-/*   Updated: 2019/04/27 16:04:07 by sbearded         ###   ########.fr       */
+/*   Updated: 2019/04/28 00:39:06 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,6 @@ void			change_env(t_list **env, char *name, char *val)
 void			mini_setenv(t_list **env, char **argv, size_t argc)
 {
 	char	*val;
-	t_list	*tmp;
-	char	*new;
 
 	if (argc > 3)
 		return (error_print("setenv", "Too many arguments."));
