@@ -6,13 +6,17 @@
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/06 14:34:53 by sbearded          #+#    #+#             */
-/*   Updated: 2019/04/27 16:46:40 by sbearded         ###   ########.fr       */
+/*   Updated: 2019/04/28 00:29:10 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*g_pwd;
+static void	ft_interrupt(int sign)
+{
+	ft_putchar('\n');
+	print_prompt();
+}
 
 int		main(int argc, char **argv, char **envp)
 {
@@ -21,6 +25,7 @@ int		main(int argc, char **argv, char **envp)
 	env = create_env_lst(envp);
 	while (1)
 	{
+		signal(SIGINT, ft_interrupt);
 		print_prompt();
 		commands(&env);
 	}

@@ -6,11 +6,16 @@
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 17:26:56 by sbearded          #+#    #+#             */
-/*   Updated: 2019/04/27 22:37:35 by sbearded         ###   ########.fr       */
+/*   Updated: 2019/04/28 00:29:43 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	ft_interrupt(int sign)
+{
+	ft_putchar('\n');
+}
 
 static void	check_com(t_list **env, char **argv)
 {
@@ -50,6 +55,7 @@ void		get_commands(t_list **env, char *str)
 		argv = ft_strsplit_multiple(*com, " \t\n\0");
 		if (expansion_argv(*env, argv) == -1)
 			break ;
+		signal(SIGINT, ft_interrupt);
 		check_com(env, argv);
 		com++;
 		ft_2d_del(&argv);

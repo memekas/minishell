@@ -6,7 +6,7 @@
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/06 14:35:38 by sbearded          #+#    #+#             */
-/*   Updated: 2019/04/27 22:29:24 by sbearded         ###   ########.fr       */
+/*   Updated: 2019/04/28 00:09:45 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <unistd.h>
 # include <dirent.h>
 # include <sys/stat.h>
+# include <signal.h>
 
 # define BUFF_PWD	500
 
