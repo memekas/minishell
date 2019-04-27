@@ -6,7 +6,7 @@
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 13:39:01 by sbearded          #+#    #+#             */
-/*   Updated: 2019/04/27 16:29:18 by sbearded         ###   ########.fr       */
+/*   Updated: 2019/04/27 19:36:40 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int		check_tildename(char *tildename, char **home)
 {
 	int		tail;
 	char	*path;
-	char	tmp;
 	DIR		*dir;
 
 	tail = 0;
@@ -42,10 +41,9 @@ int		check_tildename(char *tildename, char **home)
 		tail++;
 	while((*home)[tail] != '/')
 		tail--;
-	tmp = (*home)[tail + 1];
 	(*home)[tail + 1] = '\0';
 	path = ft_strjoin(*home, tildename);
-	(*home)[tail + 1] = tmp;
+	free(*home);
 	dir = opendir(path);
 	if (dir == NULL)
 	{
@@ -70,17 +68,18 @@ int	tilde_f(t_list *env, char **dest)
 	if ((len_name = get_tildename(&tildename, str)) == -1)
 		return (1);
 	if (ft_strequ(tildename, "+"))
-		str = search_env(env, "PWD");
+		str = ft_strdup(search_env(env, "PWD"));
 	else if (ft_strequ(tildename, "-"))
-		str = search_env(env, "OLDPWD");
+		str = ft_strdup(search_env(env, "OLDPWD"));
 	else
 	{
-		str = search_env(env, "HOME");
+		str = ft_strdup(search_env(env, "HOME"));
 		if (len_name > 0 && str)
 			if (check_tildename(tildename, &str) == 0)
 				return (-1);
 	}
 	ft_strinsert(dest, 0, len_name + 1, str);
 	free(tildename);
+	free(str);
 	return (1);
 }
