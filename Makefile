@@ -6,7 +6,7 @@
 #    By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/03 03:51:55 by sbearded          #+#    #+#              #
-#    Updated: 2019/04/28 00:40:48 by sbearded         ###   ########.fr        #
+#    Updated: 2019/04/28 01:11:36 by sbearded         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,8 @@ WK_SRC = 		wait_input.c \
 				get_env.c \
 				ft_strinsert.c \
 				dollar.c \
-				tilde.c
+				tilde.c \
+				path.c
 
 FR_SRC = 	
 

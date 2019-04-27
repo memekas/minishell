@@ -6,7 +6,7 @@
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/27 22:26:57 by sbearded          #+#    #+#             */
-/*   Updated: 2019/04/27 23:06:54 by sbearded         ###   ########.fr       */
+/*   Updated: 2019/04/28 01:28:13 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,18 @@ static int	check_com_name(char *name)
 	return (1);
 }
 
+static void	check_path_access(char *path_com, char *name, char **argv)
+{
+	char			*path;
+
+	path = get_path(path_com, name);
+	if (access(path, X_OK) == 0)
+		exec_f(argv);
+	else
+		error_print(name, "permission denied");
+	free(path);
+}
+
 static int	check_exec_path(t_list *env, char **argv)
 {
 	char			**path_com;
@@ -55,16 +67,17 @@ static int	check_exec_path(t_list *env, char **argv)
 	tmp = path_com;
 	while (*path_com)
 	{
-		dir = opendir(*(path_com++));
+		dir = opendir(*path_com);
 		while ((file = readdir(dir)))
 			if (ft_strequ(file->d_name, argv[0]))
 			{
-				exec_f(argv);
+				check_path_access(*path_com, argv[0], argv);
 				closedir(dir);
 				ft_2d_del(&tmp);
 				return (1);
 			}
 		closedir(dir);
+		path_com++;
 	}
 	ft_2d_del(&tmp);
 	return (0);
@@ -72,6 +85,8 @@ static int	check_exec_path(t_list *env, char **argv)
 
 int			mini_exec(t_list *env, char **argv)
 {
+	if (!argv[0])
+		return (1);
 	if (check_com_name(argv[0]))
 	{
 		exec_f(argv);

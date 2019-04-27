@@ -6,7 +6,7 @@
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/06 14:35:38 by sbearded          #+#    #+#             */
-/*   Updated: 2019/04/28 00:09:45 by sbearded         ###   ########.fr       */
+/*   Updated: 2019/04/28 01:11:24 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int		expansion_argv(t_list *env, char **argv);
 size_t	ft_strinsert(char **dest, size_t index, size_t size, char *src);
 size_t	get_dollar(t_list *env, char **dest, size_t index);
 int		tilde_f(t_list *env, char **dest);
+char	*get_path(char *path, char *name);
 
 /*
 ** commands
