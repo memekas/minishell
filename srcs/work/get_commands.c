@@ -6,11 +6,22 @@
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 17:26:56 by sbearded          #+#    #+#             */
-/*   Updated: 2019/04/27 15:54:26 by sbearded         ###   ########.fr       */
+/*   Updated: 2019/04/27 19:12:33 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	exec_f(char **argv)
+{
+	pid_t	pid;
+
+	pid = fork();
+	if (pid == 0)
+		execvp(argv[0], argv);
+	else if (pid > 0)
+		wait(0);
+}
 
 static int	mini_exec(t_list *env, char **argv, size_t argc)
 {
@@ -29,7 +40,7 @@ static int	mini_exec(t_list *env, char **argv, size_t argc)
 		while ((file = readdir(dir)))
 			if (ft_strequ(file->d_name, argv[0]))
 			{
-				//exec_f
+				exec_f(argv);
 				closedir(dir);
 				ft_2d_del(&tmp);
 				return (1);
@@ -58,12 +69,8 @@ static void	check_com(t_list **env, char **argv)
 	else if (ft_strequ("exit", argv[0]))
 		mini_exit(env);
 	else
-	{
-		if (mini_exec(*env, argv, argc))
-			printf("YEAH!\n");
-		else
+		if (!mini_exec(*env, argv, argc))
 			error_command_not_found(argv[0]);
-	}
 }
 
 void	get_commands(t_list **env, char *str)
