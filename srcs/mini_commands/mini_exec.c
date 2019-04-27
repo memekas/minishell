@@ -6,7 +6,7 @@
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/27 22:26:57 by sbearded          #+#    #+#             */
-/*   Updated: 2019/04/27 22:33:46 by sbearded         ###   ########.fr       */
+/*   Updated: 2019/04/27 23:06:54 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ static int	check_exec_path(t_list *env, char **argv)
 
 int			mini_exec(t_list *env, char **argv)
 {
-
 	if (check_com_name(argv[0]))
 	{
 		exec_f(argv);
