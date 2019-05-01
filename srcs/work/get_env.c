@@ -6,7 +6,7 @@
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/22 17:50:46 by sbearded          #+#    #+#             */
-/*   Updated: 2019/04/26 20:22:43 by sbearded         ###   ########.fr       */
+/*   Updated: 2019/05/01 18:47:52 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,24 @@ t_list	*create_env_lst(char **envp)
 		envp++;
 	}
 	return (new);
+}
+
+char	**env_to_arr(t_list *env)
+{
+	size_t	count;
+	size_t	i;
+	char	**arr;
+
+	if (env == NULL)
+		return (NULL);
+	count = ft_lstcount(env);
+	arr = (char**)malloc(sizeof(char*) * (count + 1));
+	i = 0;
+	while (i < count)
+	{
+		arr[i++] = ft_strdup(env->content);
+		env = env->next;
+	}
+	arr[i] = NULL;
+	return (arr);
 }

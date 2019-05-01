@@ -6,7 +6,7 @@
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/06 14:35:38 by sbearded          #+#    #+#             */
-/*   Updated: 2019/04/28 01:11:24 by sbearded         ###   ########.fr       */
+/*   Updated: 2019/05/01 18:48:32 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	get_commands(t_list **env, char *str);
 char	**get_env(t_list *env, char *str);
 char	*search_env(t_list *env, char *str);
 t_list	*search_env_lst(t_list *env, char *str);
+char	**env_to_arr(t_list *env);
 void	change_env(t_list **env, char *name, char *val);
 int		expansion_argv(t_list *env, char **argv);
 size_t	ft_strinsert(char **dest, size_t index, size_t size, char *src);
