@@ -6,13 +6,13 @@
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 23:08:41 by sbearded          #+#    #+#             */
-/*   Updated: 2019/04/28 01:02:20 by sbearded         ###   ########.fr       */
+/*   Updated: 2019/05/01 18:06:01 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int			cmp_char(char c, char *arr)
+static int	cmp_char(char c, char *arr)
 {
 	while (arr && *arr)
 	{
@@ -22,79 +22,77 @@ static int			cmp_char(char c, char *arr)
 	return (0);
 }
 
-static const char	*write_word(char const *s, char *c, char *split)
+/*static size_t	*create_word(char *word, char *str, char *check)
 {
-	while (cmp_char(*s, c))
-		s++;
-	while (!cmp_char(*s, c) && *s)
-	{
-		*split = *s;
-		s++;
-		split++;
-	}
-	*split = '\0';
-	return (s);
-}
-
-static int			get_word_len(char const *s, char *c)
-{
-	int	len;
+	size_t	len;
+	size_t	len_a;
 
 	len = 0;
-	while (cmp_char(*s, c))
-		s++;
-	while (!cmp_char(*s, c) && *s)
+	while (str[len])
 	{
-		len++;
-		s++;
+		if (!cmp_char(str[len], check))
+		{
+			if (str[len] == '\"')
+			{
+				len_a = 0;
+				while (str[len + 1 + len_a] && str[len + 1 + len_a] != '\"')
+					len_a++;
+			}
+		}
+		else
+			return (len);
 	}
-	return (len);
-}
+}*/
 
-static int			words_count(char const *s, char *c)
+static void	create_lst_split(t_list **lst, char const *s, char *c)
 {
-	int	i;
+	size_t	word_len;
+	t_list	*tmp;
 
-	i = 0;
 	while (*s)
 	{
-		if (!cmp_char(*s, c))
+		if (cmp_char(*s, c))
+			s++;
+		else
 		{
-			i++;
-			while (!cmp_char(*s, c) && *s)
-				s++;
-			if (!*s)
-				return (i);
+			word_len = 0;
+			while (s[word_len] && !cmp_char(s[word_len], c))
+				word_len++;
+			tmp = ft_lstnew(s, word_len + 1);
+			((char*)tmp->content)[word_len] = '\0';
+			ft_lstaddend(lst, tmp);
+			s += word_len;
 		}
-		s++;
 	}
-	return (i);
 }
 
-char				**ft_strsplit_multiple(char const *s, char *c)
+static char	**create_arr_split(t_list *lst)
 {
+	size_t	count;
+	size_t	i;
 	char	**split;
-	int		word;
-	int		i;
 
-	if (s == NULL)
-		return (NULL);
-	word = words_count(s, c);
-	split = (char**)malloc(sizeof(char*) * (word + 1));
-	if (split == NULL)
-		return (NULL);
+	count = ft_lstcount(lst);
+	split = (char**)malloc(sizeof(char*) * (count + 1));
 	i = 0;
-	while (i < word)
+	while (i < count)
 	{
-		split[i] = (char*)malloc(sizeof(char) * (get_word_len(s, c) + 1));
-		if (split[i] == NULL)
-		{
-			ft_2d_del(&split);
-			return (NULL);
-		}
-		s = write_word(s, c, split[i]);
+		split[i] = ft_strdup(lst->content);
+		lst = lst->next;
 		i++;
 	}
 	split[i] = NULL;
+	return (split);
+}
+
+char		**ft_strsplit_multiple(char const *s, char *c)
+{
+	t_list	*words;
+	char	**split;
+
+	words = NULL;
+	create_lst_split(&words, s, c);
+	split = create_arr_split(words);
+	ft_lstdel(&words, ft_lstdelcontent);
 	return (split);
 }
