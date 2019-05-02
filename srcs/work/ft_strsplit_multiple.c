@@ -6,7 +6,7 @@
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 23:08:41 by sbearded          #+#    #+#             */
-/*   Updated: 2019/05/01 18:06:01 by sbearded         ###   ########.fr       */
+/*   Updated: 2019/05/02 13:49:39 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,28 +21,6 @@ static int	cmp_char(char c, char *arr)
 	}
 	return (0);
 }
-
-/*static size_t	*create_word(char *word, char *str, char *check)
-{
-	size_t	len;
-	size_t	len_a;
-
-	len = 0;
-	while (str[len])
-	{
-		if (!cmp_char(str[len], check))
-		{
-			if (str[len] == '\"')
-			{
-				len_a = 0;
-				while (str[len + 1 + len_a] && str[len + 1 + len_a] != '\"')
-					len_a++;
-			}
-		}
-		else
-			return (len);
-	}
-}*/
 
 static void	create_lst_split(t_list **lst, char const *s, char *c)
 {
