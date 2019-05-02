@@ -6,7 +6,7 @@
 /*   By: sbearded <sbearded@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 23:08:41 by sbearded          #+#    #+#             */
-/*   Updated: 2019/05/02 13:49:39 by sbearded         ###   ########.fr       */
+/*   Updated: 2019/05/02 14:10:05 by sbearded         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ char		**ft_strsplit_multiple(char const *s, char *c)
 	t_list	*words;
 	char	**split;
 
+	if (s == NULL)
+		return (NULL);
 	words = NULL;
 	create_lst_split(&words, s, c);
 	split = create_arr_split(words);
